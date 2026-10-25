@@ -1,0 +1,18 @@
+services:
+  - type: worker
+    name: islamic-library-telegram-bot
+    runtime: python
+    plan: starter
+    buildCommand: "python -m py_compile bot.py"
+    startCommand: "python bot.py"
+    disk:
+      name: islamic-library-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: ADMIN_ID
+        value: "0"
+      - key: CONTENT_FILE
+        value: /var/data/content.json
